@@ -16,7 +16,7 @@ That command above created this image:
 
 ![Flagged Png](examples/flag.png)
 
-### Text Via Stdout Pipe
+### Text Via Pipe
 
 ```bash
 cat flags.go | ./imgmk -size=7

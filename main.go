@@ -16,6 +16,13 @@ func main() {
 	// Parse flags
 	flag.Parse()
 
+	// Check to see if we're passing text in via a unix pipe
+	fi, err := os.Stdin.Stat()
+	if err != nil {
+		fmt.Printf("Error running stat on stdin: %s", err)
+		os.Exit(1)
+	}
+
 	// Load the font file
 	file, err := ioutil.ReadFile(*path)
 	if err != nil {
@@ -44,7 +51,22 @@ func main() {
 	c.SetHinting(freetype.NoHinting)
 
 	// Draw text
-	_, err = c.DrawString(*text, freetype.Pt(10, 10+int(c.PointToFix32(*size)>>8)))
+	if fi.Mode() & os.ModeNamedPipe != 0 {
+		reader := bufio.NewReader(os.Stdin)
+		var count float64 = 1
+		for {
+			line, err := reader.ReadString('\n')
+			if err != nil {
+				break
+			}
+
+			drawText(c, line, *size, count)
+			count++
+		}
+	} else {
+	// Draw text
+		drawText(c, *text, *size, 1)
+	}
 
 	// Create image
 	image, err := os.Create(*name)
@@ -68,4 +90,14 @@ func main() {
 		os.Exit(1)
 	}
 
+}
+
+func drawText(c *freetype.Context, text string, size, line float64) {
+	offsetY := 10+int(c.PointToFix32(size*line)>>8);
+
+	_, err := c.DrawString(text, freetype.Pt(10, offsetY))
+	if err != nil {
+		fmt.Println("Could not draw text: %s", err)
+		os.Exit(1)
+	}
 }

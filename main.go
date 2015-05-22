@@ -1,15 +1,15 @@
 package main
 
 import (
-	"github.com/lukevers/freetype-go/freetype"
-	"io/ioutil"
-	"os"
 	"bufio"
-	"fmt"
 	"flag"
+	"fmt"
+	"github.com/lukevers/freetype-go/freetype"
 	"image"
 	"image/draw"
 	"image/png"
+	"io/ioutil"
+	"os"
 )
 
 func main() {
@@ -67,6 +67,5 @@ func main() {
 		fmt.Printf("Error flushing bufio writer: %s", err)
 		os.Exit(1)
 	}
-
 
 }

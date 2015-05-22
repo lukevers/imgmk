@@ -94,4 +94,10 @@ If you want the background to be transparent instead of white, pass the transpar
 -transparent
 ```
 
+This image below was generated with the following:
+
+```bash
+./imgmk -transparent -width=200 -height=100
+```
+
 ![Transparent](examples/transparent.png)

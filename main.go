@@ -35,7 +35,7 @@ func main() {
 	rgba := image.NewRGBA(image.Rect(0, 0, *width, *height))
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 	c := freetype.NewContext()
-	c.SetDPI(300)
+	c.SetDPI(*dpi)
 	c.SetFont(font)
 	c.SetFontSize(*size)
 	c.SetClip(rgba.Bounds())

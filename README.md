@@ -85,3 +85,11 @@ And the DPI!
 ```bash
 -dpi=300
 ```
+
+#### Transparent
+
+If you want the background to be transparent instead of white, pass the transparent flag.
+
+```bash
+-transparent
+```

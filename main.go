@@ -41,6 +41,12 @@ func main() {
 	fg, bg := image.Black, image.White
 	rgba := image.NewRGBA(image.Rect(0, 0, *width, *height))
 
+	// If we passed the transparent flag then we want the
+	// background to be transparent.
+	if *transparent {
+		bg = image.Transparent
+	}
+
 	// Draw the empty image
 	draw.Draw(rgba, rgba.Bounds(), bg, image.ZP, draw.Src)
 

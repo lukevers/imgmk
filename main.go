@@ -51,7 +51,7 @@ func main() {
 	c.SetHinting(freetype.NoHinting)
 
 	// Draw text
-	if fi.Mode() & os.ModeNamedPipe != 0 {
+	if fi.Mode()&os.ModeNamedPipe != 0 {
 		reader := bufio.NewReader(os.Stdin)
 		var count float64 = 1
 		for {
@@ -64,7 +64,7 @@ func main() {
 			count++
 		}
 	} else {
-	// Draw text
+		// Draw text
 		drawText(c, *text, *size, 1)
 	}
 
@@ -93,7 +93,7 @@ func main() {
 }
 
 func drawText(c *freetype.Context, text string, size, line float64) {
-	offsetY := 10+int(c.PointToFix32(size*line)>>8);
+	offsetY := 10 + int(c.PointToFix32(size*line)>>8)
 
 	_, err := c.DrawString(text, freetype.Pt(10, offsetY))
 	if err != nil {

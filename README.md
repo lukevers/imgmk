@@ -93,3 +93,5 @@ If you want the background to be transparent instead of white, pass the transpar
 ```bash
 -transparent
 ```
+
+![Transparent](examples/transparent.png)
